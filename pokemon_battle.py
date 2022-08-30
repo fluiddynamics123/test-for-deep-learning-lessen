@@ -1,3 +1,5 @@
+#test2
+
 import random
 
 def call_name_power(a):
