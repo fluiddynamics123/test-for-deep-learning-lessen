@@ -177,6 +177,9 @@ def main():
       print("Your Attack")
       HP_opp = attack(is_player_attack = True)
       print("opponent HP is..." + str(HP_opp) + '\n')
+      # この時点でHPが0ならループを抜ける
+      if(HP_opp < 0):
+        break
 
       print("Opponent's Attack")
       HP_self = attack(is_player_attack = False)
@@ -186,6 +189,9 @@ def main():
       print("Opponent's Attack")
       HP_self = attack(is_player_attack = False)
       print("your HP is..." + str(HP_self) + '\n')
+      # この時点でHPが0ならループを抜ける
+      if(HP_self < 0):
+        break
 
       print("Your Attack")
       HP_opp = attack(is_player_attack = True)
