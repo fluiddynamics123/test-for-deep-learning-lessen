@@ -2,7 +2,6 @@ import random
 import math
 
 def call_name_power(a):
-  print(a)
   if a == 0:
     type = "fire"
     HP = 150
@@ -128,25 +127,29 @@ def main():
   global omega_self, omega_opp  # 相性による重み係数
 
   while True:
-    which_pokemon = int(input("which pokemon do you use? 0:fire, 1:water, 2;leaf"))
+    which_pokemon = int(input("which pokemon do you use? (0:fire, 1:water, 2;leaf): "))
     if which_pokemon <= 2:
+      print("\n")
       break
     else:
       print("Chose the number from 0 to 2!!")
 
-  print("you chose" + str(which_pokemon))
+  print("Your Pokemon")
   type_self, HP_self, speed_self = call_name_power(which_pokemon)
   print ("type is ..." + type_self)
   print ("HP is ..." + str(HP_self))
   print ("SPEED is ..." + str(speed_self))
+  print("\n")
 
   opponent_pokemon = random.randint(0,2)
   type_opp ,HP_opp, speed_opp = call_name_power(opponent_pokemon)
+  print("Opponent's Pokemon")
   print ("type is ..." + type_opp)
   print ("HP is ..." + str(HP_opp))
   print ("SPEED is ..." + str(speed_opp))
+  print("\n")
 
-  print("Battle start")
+  print("Level setting...")
   omega_self = omega_opp = 1.0
   if type_self != type_opp:
     omega_self,omega_opp = call_relation(type_self,type_opp) #相性による重み係数の呼び出し
@@ -162,7 +165,9 @@ def main():
   print("      " + type_self + " / " + str(level_self) + " / " + str(HP_self) + " / " + str(speed_self) )
   print("opponent pokemon's type / level / HP / speed...")
   print("      " + type_opp + " / " + str(level_opp) + " / " + str(HP_opp) + " / " + str(speed_opp) )
+  print("\n")
 
+  print("Battle start\n")
   while HP_self > 0 and HP_opp > 0:
     if speed_self >= speed_opp:
       print("Your Attack")
