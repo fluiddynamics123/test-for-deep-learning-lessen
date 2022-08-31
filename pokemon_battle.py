@@ -6,16 +6,16 @@ def call_name_power(a):
   if a == 0:
     type = "fire"
     HP = 150
-    SPEAD = 120
+    speed = 120
   elif a == 1:
     type = "water"
     HP = 130
-    SPEAD = 130
+    speed = 130
   else:
     type = "leaf"
     HP = 180
-    SPEAD = 80
-  return type,HP,SPEAD
+    speed = 80
+  return type,HP,speed
 
 def call_relation(self,opp):
   if self == "leaf":
@@ -123,8 +123,8 @@ def attack(is_player_attack):
   return HP_defender
 
 def main():
-  global type_self, HP_self, spead_self # プレイヤーのポケモンのステータス
-  global type_opp ,HP_opp, spead_opp # 相手のポケモンのステータス
+  global type_self, HP_self, speed_self # プレイヤーのポケモンのステータス
+  global type_opp ,HP_opp, speed_opp # 相手のポケモンのステータス
   global omega_self, omega_opp  # 相性による重み係数
 
   while True:
@@ -135,16 +135,16 @@ def main():
       print("Chose the number from 0 to 2!!")
 
   print("you chose" + str(which_pokemon))
-  type_self, HP_self, spead_self = call_name_power(which_pokemon)
+  type_self, HP_self, speed_self = call_name_power(which_pokemon)
   print ("type is ..." + type_self)
   print ("HP is ..." + str(HP_self))
-  print ("SPEED is ..." + str(spead_self))
+  print ("SPEED is ..." + str(speed_self))
 
   opponent_pokemon = random.randint(0,2)
-  type_opp ,HP_opp, spead_opp = call_name_power(opponent_pokemon)
+  type_opp ,HP_opp, speed_opp = call_name_power(opponent_pokemon)
   print ("type is ..." + type_opp)
   print ("HP is ..." + str(HP_opp))
-  print ("SPEED is ..." + str(spead_opp))
+  print ("SPEED is ..." + str(speed_opp))
 
   print("Battle start")
   omega_self = omega_opp = 1.0
@@ -154,17 +154,17 @@ def main():
   level_opp = random.randint(1,50)
 
   HP_self = int(math.sqrt(level_self)*HP_self) #HPは平方根を乗する
-  spead_self = int(math.log(math.e + level_self -1)*spead_self) #speedはln(e + level -1)を乗する
+  speed_self = int(math.log(math.e + level_self -1)*speed_self) #speedはln(e + level -1)を乗する
   HP_opp = int(math.sqrt(level_opp)*HP_opp)
-  spead_opp = int(math.log(math.e + level_opp -1)*spead_opp)
+  speed_opp = int(math.log(math.e + level_opp -1)*speed_opp)
 
   print("Your pokemon's type / level / HP / speed...")
-  print("      " + type_self + " / " + str(level_self) + " / " + str(HP_self) + " / " + str(spead_self) )
+  print("      " + type_self + " / " + str(level_self) + " / " + str(HP_self) + " / " + str(speed_self) )
   print("opponent pokemon's type / level / HP / speed...")
-  print("      " + type_opp + " / " + str(level_opp) + " / " + str(HP_opp) + " / " + str(spead_opp) )
+  print("      " + type_opp + " / " + str(level_opp) + " / " + str(HP_opp) + " / " + str(speed_opp) )
 
   while HP_self > 0 and HP_opp > 0:
-    if spead_self >= spead_opp:
+    if speed_self >= speed_opp:
       print("Your Attack")
       HP_opp = attack(is_player_attack = True)
       print("opponent HP is..." + str(HP_opp) + '\n')
@@ -173,7 +173,7 @@ def main():
       HP_self = attack(is_player_attack = False)
       print("your HP is..." + str(HP_self) + '\n')
 
-    elif spead_self < spead_opp:
+    elif speed_self < speed_opp:
       print("Opponent's Attack")
       HP_self = attack(is_player_attack = False)
       print("your HP is..." + str(HP_self) + '\n')
