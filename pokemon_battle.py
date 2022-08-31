@@ -66,9 +66,13 @@ moves = [
 ]
 
 # 技の選択
-def select_move():
+def select_move(is_random):
   while True:
-    move_idx = int(input('select move: 0:light, 1:middle, 2:heavy'))
+    if(is_random):
+      move_idx = random.randint(0, 2)
+    else:
+      move_idx = int(input('select move (0:light, 1:middle, 2:heavy): '))
+
     if move_idx == 0 or move_idx == 1 or move_idx == 2:
       print('selected: ' + moves[move_idx]['name'])
       return moves[move_idx]
@@ -108,11 +112,11 @@ def attack(is_player_attack):
   if(is_player_attack):
     HP_defender = HP_opp
     omega_attacker = omega_self
-    move = select_move()
+    move = select_move(is_random = False)
   else:
     HP_defender = HP_self
     omega_attacker = omega_opp
-    move = moves[random.randint(0, 2)]
+    move = select_move(is_random = True)
 
   is_hit = calculate_accuracy(move)
   # 命中した場合攻撃を実行
